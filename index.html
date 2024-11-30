@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Fit Memory Allocation Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Next Fit Memory Allocation Simulator</h1>
+            <div class="setup-choice">
+                <button onclick="useDefaultSetup()" class="btn-primary">Use Default Setup</button>
+                <button onclick="showCustomSetup()" class="btn-primary">Create Custom Setup</button>
+            </div>
+        </header>
+
+        <!-- Memory Setup Panel (Initially Hidden) -->
+        <div id="setupPanel" class="setup-panel" style="display: none;">
+            <div class="setup-section">
+                <h2>Step 1: Define Total Memory</h2>
+                <div class="input-group">
+                    <label for="totalMemorySize">Total Memory Size (KB):</label>
+                    <input type="number" id="totalMemorySize" min="1" placeholder="Enter total memory size">
+                    <button onclick="setTotalMemory()" class="btn-primary">Set Memory Size</button>
+                </div>
+            </div>
+
+            <div class="setup-section" id="blockSetup" style="display: none;">
+                <h2>Step 2: Add Memory Blocks</h2>
+                <div class="input-group">
+                    <label for="blockSize">Block Size (KB):</label>
+                    <input type="number" id="blockSize" min="1" placeholder="Enter block size">
+                    <button onclick="addBlock()" class="btn-primary">Add Block</button>
+                </div>
+                <div id="remainingMemory" class="memory-info">
+                    Remaining Memory: 0 KB
+                </div>
+                <div id="blockList" class="block-list">
+                    <!-- Block list will be populated here -->
+                </div>
+                <button onclick="startSimulation()" id="startSimBtn" class="btn-success" style="display: none;">
+                    Start Simulation
+                </button>
+            </div>
+        </div>
+
+        <!-- Simulation Panel -->
+        <div id="simulationPanel">
+            <div class="control-panel">
+                <div class="input-group">
+                    <label for="processSize">Process Size (KB):</label>
+                    <input type="number" id="processSize" min="1" placeholder="Enter process size">
+                    <button onclick="allocateMemory()" class="btn-allocate">Allocate Process</button>
+                    <button onclick="resetMemory()" class="btn-reset">Reset Memory</button>
+                    <button onclick="resetAll()" class="btn-reset">New Setup</button>
+                </div>
+                <div id="message" class="message"></div>
+            </div>
+
+            <div class="memory-container">
+                <div class="memory-visualization" id="memoryBlocks">
+                    <!-- Memory blocks will be populated here -->
+                </div>
+            </div>
+
+            <div class="stats-panel">
+                <h2>Memory Statistics</h2>
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <label>Total Memory:</label>
+                        <span id="totalMemoryStats">0 KB</span>
+                    </div>
+                    <div class="stat-item">
+                        <label>Allocated Memory:</label>
+                        <span id="allocatedMemory">0 KB</span>
+                    </div>
+                    <div class="stat-item">
+                        <label>Free Memory:</label>
+                        <span id="freeMemory">0 KB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color free"></div>
+                    <span>Free Memory</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color allocated"></div>
+                    <span>Allocated Memory</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color checking"></div>
+                    <span>Currently Checking</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
